@@ -14,12 +14,11 @@ The main idea is two scripts, the first call the container that it makes the tes
 
 #### Building container
 
-$docker built -t annabe .
+    $docker built -t annabe .
 
 #### Running container
 
-$docker run -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/shm:/dev/shm -e DISPLAY=${DISPLAY} -it annabe /bin/bash  
-
+    $docker run --rm -v /tmp/har:/tmp/har -it annabe annabe http://www.fernandoike.com
 
 ## Author
 

@@ -1,13 +1,10 @@
-FROM fike/jessie-locale:pt_BR
+FROM fike/debian:jessie.pt_BR
 
 MAINTAINER Fernando Ike <fike@midstorm.org>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD firefox_navigate.py start.sh /usr/local/bin/
-
-RUN chmod +x /usr/local/bin/firefox_navigate.py /usr/local/bin/start.sh \
-      && mkdir /opt/annabe
+ENV DISPLAY :99
 
 RUN sed -i 's/jessie\ main/jessie\ main\ contrib\ non-free/g' /etc/apt/sources.list && \
       sed -i 's/jessie\-updates\ main/jessie\-updates\ main\ contrib\ non-free/g' \
@@ -32,17 +29,11 @@ RUN pip install selenium
 
 WORKDIR /opt/annabe
 
-# Temporarily disabled, python-selenium doesn't load firebug version + 1.XX.XX.
-#RUN curl -s --location -O $(curl -s --location https://addons.mozilla.org/firefox/addon/firebug/versions/ | \
-#      sed  -n -e 's/.*\(https\:\/\/addons\.mozilla\.org\/.*\/firebug\-2.0.11\-fx\.xpi*\).*/\1/p')
-
-RUN curl -s --location -O $(curl -s --location https://addons.mozilla.org/firefox/addon/firebug/versions/ | \
-      sed  -n -e 's/.*\(https\:\/\/addons\.mozilla\.org\/.*\/firebug\-1\..*\.xpi*\).*/\1/p')
-
-
-RUN curl -s --location -O $(curl -s --location http://getfirebug.com/releases/netexport/update.rdf | \
-      sed -n -e 's/.*\(https\:\/\/getfirebug\.com\/.*\/netExport\-.*\.xpi*\).*/\1/p')
+RUN curl -s --location -O $(curl -s --location https://addons.mozilla.org/en-US/firefox/addon/har-export-trigger/versions/ | \
+      sed -n -e 's/.*\(https\:.*har_export_trigger.*\.xpi\).*/\1/p'| head -n1) 
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD /bin/bash
+ADD firefox_navigate.py annabe /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/firefox_navigate.py /usr/local/bin/annabe
