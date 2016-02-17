@@ -33,6 +33,8 @@ RUN curl -s --location -O $(curl -s --location https://addons.mozilla.org/en-US/
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD firefox_navigate.py annabe /usr/local/bin/
+ADD annabe /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/firefox_navigate.py /usr/local/bin/annabe
+ADD firefox_navigate.py /opt/annabe/
+
+RUN chmod +x /opt/annabe/firefox_navigate.py /usr/local/bin/annabe
