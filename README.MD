@@ -20,6 +20,18 @@ The main idea is two scripts, the first call the container that it makes the tes
 
     $docker run --rm -v /tmp/har:/tmp/har -it annabe annabe http://www.fernandoike.com
 
+##### Multiples URLS
+
+    $for i in $(echo "http://www.fernandoike.com http://www.uol.com.br") 
+    do 
+      docker run -v /tmp/har:/tmp/har fike/annabe annabe $i 
+    done
+
+    $for i in $(cat url_list.txt)
+    do
+      docker run -v /tmp/har:/tmp/har fike/annabe annabe $i
+    done 
+ 
 ## Author
 
 Annabe was Leandro Cassiano idea and the initial version.

@@ -27,6 +27,7 @@ fp.set_preference("devtools.netmonitor.har.defaultLogDir", "/tmp/har");
 fp.set_preference("devtools.netmonitor.har.defaultFileName", Host+"_%y-%m-%d_%H-%M-%S");
 fp.set_preference("devtools.netmonitor.har.enableAutoExportToFile", True);
 fp.set_preference("devtools.netmonitor.har.forceExport", True);
+fp.set_preference("devtools.netmonitor.har.includeResponseBodies", False)
 fp.set_preference("devtools.toolbox.selectedTool", "netmonitor");
 fp.set_preference("extensions.netmonitor.har.autoConnect", True);
 fp.set_preference("extensions.netmonitor.har.enableAutomation", True);
