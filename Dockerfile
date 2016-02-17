@@ -8,12 +8,12 @@ ENV DISPLAY :99
 
 RUN sed -i 's/jessie\ main/jessie\ main\ contrib\ non-free/g' /etc/apt/sources.list && \
       sed -i 's/jessie\-updates\ main/jessie\-updates\ main\ contrib\ non-free/g' \
-      /etc/apt/sources.list
+      /etc/apt/sources.list && \
+      echo deb http://mozilla.debian.net/ jessie-backports \
+        iceweasel-release >> /etc/apt/sources.list.d/mozilla.list
 
-RUN echo deb http://mozilla.debian.net/ jessie-backports \
-       iceweasel-release >> /etc/apt/sources.list.d/mozilla.list
-
-RUN apt-get update -y && apt-get upgrade -y && apt-get install curl -qq
+RUN apt-get update -y && apt-get upgrade -y && \
+      apt-get install --no-install-recommends curl -qq
 
 RUN curl -s -O http://mozilla.debian.net/pkg-mozilla-archive-keyring_1.1_all.deb \
       && dpkg -i pkg-mozilla-archive-keyring_1.1_all.deb && rm *.deb && \
@@ -22,8 +22,7 @@ RUN curl -s -O http://mozilla.debian.net/pkg-mozilla-archive-keyring_1.1_all.deb
 RUN apt-get install --no-install-recommends xfonts-100dpi \
       xfonts-75dpi xfonts-scalable xfonts-cyrillic xvfb python-pip -qq && \
       apt-get install -t jessie-backports --no-install-recommends iceweasel \
-      iceweasel-l10n-pt-br ca-certificates -qq  && apt-get install \
-      --no-install-recommends flashplugin-nonfree -qq
+      iceweasel-l10n-pt-br ca-certificates -qq 
 
 RUN pip install selenium
 
