@@ -24,7 +24,7 @@ fp.add_extension(extension='/opt/annabe/har_export_trigger-0.5.0-beta.7-fx.xpi')
 
 fp.set_preference("devtools.netmonitor.enabled", True);
 fp.set_preference("devtools.netmonitor.har.defaultLogDir", "/tmp/har");
-fp.set_preference("devtools.netmonitor.har.defaultFileName", Host+"_%y-%m-%d_%H-%M-%S");
+fp.set_preference("devtools.netmonitor.har.defaultFileName", Host+"_%Y-%m-%d_%H-%M-%S");
 fp.set_preference("devtools.netmonitor.har.enableAutoExportToFile", True);
 fp.set_preference("devtools.netmonitor.har.forceExport", True);
 fp.set_preference("devtools.netmonitor.har.includeResponseBodies", False)
